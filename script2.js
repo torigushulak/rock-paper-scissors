@@ -1,8 +1,8 @@
 // randon integer chooses from array
 function computerplay() {
     const rps = ['rock', 'paper', 'scissors'];
-    const rand = rps.getRandomInt();
-    return rand
+    const rand = getRandomInt();
+    return rps[rand]
 }
 
 // max and min of random integer clue: mathfloor
@@ -16,23 +16,23 @@ console.log(getRandomInt())
 // 0 = computer win
 // 1 = player win
 // -1 = else "tie"
-function playRound(playerSelection, computerPlay) {
-    if (playerSelection == 'rock'& computerPlay == 'paper') {
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection == 'rock' , computerSelection == 'paper') {
         return 0
     }
-    if (playerSelection == 'paper' & computerPlay == 'rock') {
+    if (playerSelection == 'paper' , computerSelection == 'rock') {
         return 1
     }
-    if (playerSelection == 'paper' & computerPlay == 'scissors') {
+    if (playerSelection == 'paper' , computerSelection == 'scissors') {
         return 0
     }
-    if (playerSelection == 'scissors' & computerPlay == 'paper') {
+    if (playerSelection == 'scissors' , computerSelection == 'paper') {
         return 1
     }
-    if (playerSelection == 'rock' & computerPlay == 'scissors') {
+    if (playerSelection == 'rock' , computerSelection == 'scissors') {
         return 1
     }
-    if (playerSelection == 'scissors' & computerPlay == 'rock') {
+    if (playerSelection == 'scissors' , computerSelection == 'rock') {
         return 0
     }
     else {
@@ -41,15 +41,15 @@ function playRound(playerSelection, computerPlay) {
 }
 
 // takes input and returns lowercase
-function caseCleanup() {
+function caseCleanup(input) {
     const cleanInput = input.toLowerCase();
     return cleanInput
 }
 
 // promt for input and compare clean output
 function takeInput() {
-    result = window.prompt("Please input r, p, or s!");
-    const cleanOutput = result.caseCleanup();
+    let input = window.prompt("Please input r, p, or s!");
+    const cleanOutput = caseCleanup(input);
     if (cleanOutput == 'r') {`0`
         return "rock"
     }
@@ -63,28 +63,31 @@ function takeInput() {
 
 // 
 function game() {
-    for (let turn = 0; turn < 5; i++) {
-        const playerSelection = takeInput();
-        const computerPlay = computerplay();
-        const result = playRound();
+    let computerScore = 0;
+    let playerScore = 0;
 
-        console.log("titties")
+    for (let turn = 0; turn < 5; turn++) {
+        const playerSelection = takeInput();
+        const computerSelection = computerplay();
+        const result = playRound(playerSelection, computerSelection);
         
+        // eval results => displays result on screen
+        if (result == 0) {
+            computerScore++
+            window.alert("You Lose!")
+        }
+        else if (result == 1) {
+            playerScore++
+            window.alert("You Win!")
+        }
+        else if (result == -1) {
+            window.alert("You Tie!")
+        }
+        else {
+            window.alert('poop')
+        }
     }
-    console.log("titties")
-        
-        // if (result == 0) {
-        //     return window.alert("You Lose!")
-        // }
-        // if (result == 1) {
-        //     return window.alert("You Win!")
-        // }
-        // if (result == -1) {
-        //     return window.alert("You Tie!")
-        // }
-        // else {
-        //     return window.alert("Input not valid");
-        // }
-    
+
+    window.alert(`Player: ${playerScore} | Computer: ${computerScore}`)
 }
 console.log(game())
