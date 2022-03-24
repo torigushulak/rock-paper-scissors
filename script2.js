@@ -1,8 +1,8 @@
 // randon integer chooses from array
 function computerplay() {
     const rps = ['rock', 'paper', 'scissors'];
-    const rand = rps.getRandomInt();
-    return rand
+    const rand = getRandomInt();
+    return rps[rand]
 }
 
 // max and min of random integer clue: mathfloor
@@ -41,15 +41,15 @@ function playRound(playerSelection, computerPlay) {
 }
 
 // takes input and returns lowercase
-function caseCleanup() {
+function caseCleanup(input) {
     const cleanInput = input.toLowerCase();
     return cleanInput
 }
 
 // promt for input and compare clean output
 function takeInput() {
-    result = window.prompt("Please input r, p, or s!");
-    const cleanOutput = result.caseCleanup();
+    let result = window.prompt("Please input r, p, or s!");
+    const cleanOutput = caseCleanup(result);
     if (cleanOutput == 'r') {`0`
         return "rock"
     }
@@ -63,28 +63,31 @@ function takeInput() {
 
 // 
 function game() {
-    for (let turn = 0; turn < 5; i++) {
-        const playerSelection = takeInput();
-        const computerPlay = computerplay();
-        const result = playRound();
 
-        console.log("titties")
-        
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (let turn = 0; turn < 5; turn++) {
+        const playerSelection = takeInput();
+        const computerSelection = computerplay();
+        const result = playRound(playerSelection, computerSelection);
+
+        // comp win 
+        if (result == 0) {
+            computerScore += 1;
+            window.alert("You Lose!")
+        }
+        // player win
+        if (result == 1) {
+            playerScore += 1;
+            window.alert("You Win!")
+        }
+        // draw
+        if (result == -1) {
+            window.alert("You Tie!")
+        }
     }
-    console.log("titties")
-        
-        // if (result == 0) {
-        //     return window.alert("You Lose!")
-        // }
-        // if (result == 1) {
-        //     return window.alert("You Win!")
-        // }
-        // if (result == -1) {
-        //     return window.alert("You Tie!")
-        // }
-        // else {
-        //     return window.alert("Input not valid");
-        // }
-    
+    window.alert(`Player Score: ${playerScore} | Computer Score: ${computerScore}`)
 }
-console.log(game())
+
+game()
